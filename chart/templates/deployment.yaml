@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fact-deployment
+  labels:
+    app: fact
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: fact
+  template:
+    metadata:
+      labels:
+        app: fact
+    spec:
+      containers:
+      - name: fact
+        image: segflow/factservice:latest
+        ports:
+        - containerPort: 8080
