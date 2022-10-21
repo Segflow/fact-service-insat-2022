@@ -11,11 +11,15 @@ spec:
       app: fact
   template:
     metadata:
+      annotations:
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
+        prometheus.io/scrape: "true"
       labels:
         app: fact
     spec:
       containers:
       - name: fact
-        image: segflow/factservice:latest
+        image: segflow/factservice:{{ .Values.image.tag }}
         ports:
         - containerPort: 8080
