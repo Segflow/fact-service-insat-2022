@@ -1,6 +1,6 @@
 
 deployment:
-  replicas: 6
+  replicas: 1
 
 image:
   tag: latest

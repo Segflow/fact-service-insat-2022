@@ -23,3 +23,12 @@ spec:
         image: segflow/factservice:{{ .Values.image.tag }}
         ports:
         - containerPort: 8080
+        env:
+          - name: HOST_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
+          - name: OTEL_EXPORTER_OTLP_ENDPOINT # Needed for traces to work.
+            value: "http://$(HOST_IP):4317"
+          - name: OTEL_SERVICE_NAME           # Service name to be used by the tracer
+            value: "fact-service"
