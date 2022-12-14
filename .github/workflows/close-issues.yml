@@ -1,0 +1,19 @@
+name: 'Issues Lockdown'
+
+on:
+  issues:
+    types: opened
+
+permissions:
+  issues: write
+
+jobs:
+  action:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: dessant/repo-lockdown@v3
+        with:
+            github-token: ${{ github.token }}
+            issue-comment: 'Issue should be created in Jira instead'
+            close-issue: true
+            close-pr: false
